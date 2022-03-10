@@ -9,26 +9,28 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+// for every node, we will check if the nodes val lies in valid range. 
+// for left node (-infinity,root->val)
+// for right node (root->val,+infinity)
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {
-        TreeNode* prev=NULL;
-        return checkBST(root,prev);
+        return check_BST(root,LONG_MIN,LONG_MAX);
     }
-    
-    //we will be doing inorder traversal and as soon as we find BST condition voilated, we return false.
-    // else we will be keeping the prev node updating .
-    
 private:
-    bool checkBST(TreeNode* root,TreeNode* &prev){ 
-        //prev by reference bcz we need to update it everytime we call for left or right subtree
-        if(!root) 
-            return true; // base case 
-        if(!checkBST(root->left,prev))
-            return false; // function call for left subtree - inorder traversal.
-        if(prev && prev->val>=root->val)
+    bool check_BST(TreeNode* root,long min,long max){
+        if(root==NULL)
+            return true;
+        if(root->val>min && root->val<max)
+        {
+            // for left subtree, the min will remain same and max will be root's val
+            bool left = check_BST(root->left,min,root->val);
+            // for right subtree, the max will remain same and min will be root's val
+            bool right = check_BST(root->right,root->val,max);
+            return left && right;
+        }
+        else
             return false;
-        prev=root; // update prev to root everytime we found BST condition satisfied.
-        return checkBST(root->right,prev);    // right subtree recursion call
     }
 };

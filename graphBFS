@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+class solution{
+    public:
+    vector<int> bfsgraph(int v,vector<int> adj[]){
+	vector<int> bfs; // vector to be returned
+	vector<int> vis(v-1,0); // size(v-1), initialised - 0
+	for(int i=1;i<v;i++){
+		if(!vis[i]){
+			queue<int> q;
+			q.push(i);
+			vis[i]=1;
+			while(!q.empty()){
+				int node=q.front();
+				q.pop();
+				bfs.push_back(node);
+				for(auto it:adj[node]) // pushing all its adjacent nodes in queue
+				{
+					if(!vis[it]){
+						q.push(it);
+						vis[it]=1;
+					}
+				}
+			}
+		}
+	}
+	return bfs;
+}
+};
+int main() {
+    //cout<<"pg starts";
+    int n,m;
+    cin>>n>>m;
+    // adjacency list to store graph.
+    vector<int> adj[n+1];
+    // for loop inorder to cover every component.
+    for(int i=0;i<m;i++){
+        int u,v;
+        cin>>u>>v;
+        adj[u].push_back(v); // node u is connected to v
+        adj[v].push_back(u); // similarily v to u.
+    }
+    solution s;
+    vector<int> ans=s.bfsgraph(7,adj);
+    for(auto it:ans)
+    cout<<it<<" ";
+    return 0;
+}
+

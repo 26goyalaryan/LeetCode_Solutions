@@ -4,7 +4,7 @@ class solution{
     public:
     vector<int> bfsgraph(int v,vector<int> adj[]){
 	vector<int> bfs; // vector to be returned
-	vector<int> vis(v-1,0); // size(v-1), initialised - 0
+	vector<int> vis(v-1,0); // size(v+1), initialised - 0
 	for(int i=1;i<v;i++){
 		if(!vis[i]){
 			queue<int> q;

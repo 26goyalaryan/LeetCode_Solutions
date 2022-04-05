@@ -4,9 +4,7 @@ public:
         int l=0,r=h.size()-1;
         int ans=0;
         while(l<r){
-            int width=r-l;
-            int ht=min(h[l],h[r]);
-            ans=max(ans,width*ht);
+            ans=max(ans,(r-l)*min(h[l],h[r]));
             if(h[l]>h[r])
                 r--;
             else

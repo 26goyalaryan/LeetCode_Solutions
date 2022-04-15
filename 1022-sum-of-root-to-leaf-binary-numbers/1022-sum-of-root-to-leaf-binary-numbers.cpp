@@ -23,7 +23,8 @@ public:
     int sumRootToLeaf(TreeNode* root,int val=0) {
         if(root==NULL)
             return 0;
-        val=val*2+ root->val*1;
+        //val=val*2+ root->val*1;
+        val=(val<<1)|root->val; // left shift operator is used.
         return root->left==root->right ? val:
         sumRootToLeaf(root->left,val) //left subtree call
         + sumRootToLeaf(root->right,val);

@@ -12,17 +12,17 @@
 class Solution {
 public:
     bool leafSimilar(TreeNode* root1, TreeNode* root2) {
-        vector<int> r1,r2;
+        string r1,r2;
         helper(root1,r1);
         helper(root2,r2);
         return r1==r2;
     }
 private:
-    void helper(TreeNode* root,vector<int> &r){
+    void helper(TreeNode* root,string &r){
         if(root==NULL)
             return;
         if(!root->right && !root->left)
-            r.push_back(root->val);
+            r+=to_string(root->val)+'*';
         helper(root->left,r);
         helper(root->right,r);
     }

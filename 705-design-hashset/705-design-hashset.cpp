@@ -1,20 +1,45 @@
 class MyHashSet {
-    vector<bool> nums;
 public:
-    MyHashSet() {  
-        nums.resize(1e6+1);
+    vector<list<int>>v;
+    int size=11;
+    MyHashSet() {
+       v.resize(size); 
+    }
+    int hash(int key)
+    {
+        int i=key%size;
+        return i;
+    }
+    bool search(int key)
+    {
+        int i=hash(key);
+        list<int>::iterator it = find(v[i].begin(),v[i].end(),key);
+        if(it!=v[i].end())
+        {
+            return true;
+        }
+        return false;
+        
     }
     
     void add(int key) {
-        nums[key]=true;
+        int i=hash(key);
+        if(!search(key))
+        {
+            v[i].push_back(key);
+        }
     }
     
     void remove(int key) {
-        nums[key]=false;
+       int i=hash(key);
+        if(search(key))
+        {
+            v[i].remove(key);
+        }
     }
     
     bool contains(int key) {
-        return nums[key];
+      return search(key);  
     }
 };
 

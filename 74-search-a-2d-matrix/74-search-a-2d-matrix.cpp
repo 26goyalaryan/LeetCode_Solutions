@@ -1,26 +1,20 @@
 class Solution {
-private:
-    bool bs(int low,int high,int target,vector<int> &n){
-        while(low<=high){
-            int mid=(high+low)/2;
-            if(target==n[mid])
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int rows=matrix.size();
+        int cols=matrix[0].size();
+        int row=0,col=cols-1; // point on last element in first row.
+        while(row<rows && col>=0){
+            if(matrix[row][col]==target)
                 return true;
-            else if(target>n[mid])
-                low=mid+1;
-            else
-                high=mid-1;
+            if(target>matrix[row][col])
+                //since the target is greater, we need to move in next row.
+                //bcz it is impossible to find in same row towards left as last element is                       //already smaller
+                
+                row++; // ie move right in bst
+            else 
+                col--; // ie move left in bst
         }
         return false;
-}
-public:
-    bool searchMatrix(vector<vector<int>>& m, int target) {
-        bool temp;
-        for(int i=0;i<m.size();i++){
-            if(m[i][0]<=target && target<=m[i][m[0].size()-1]){
-                temp=bs(0,m[0].size(),target,m[i]);
-                break;
-            }
-        }
-        return temp;
     }
 };

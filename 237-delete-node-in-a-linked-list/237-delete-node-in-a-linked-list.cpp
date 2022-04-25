@@ -9,11 +9,10 @@
 class Solution {
 public:
     void deleteNode(ListNode* node) {
-        ListNode* current=node;
-        ListNode* succ=node->next;
-        current->val=succ->val;
-        current->next=succ->next;
-        succ->next=NULL;
-        delete succ;
+        ListNode* curr=node;
+        ListNode* nxt=node->next;
+        curr->val=nxt->val; //updating value of next node to curr node;
+        curr->next=nxt->next; // adjusting next pointer
+        delete nxt; //delete the target node;
     }
 };

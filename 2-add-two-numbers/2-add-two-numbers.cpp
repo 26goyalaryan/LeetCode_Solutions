@@ -16,7 +16,8 @@ public:
         int carry=0;
         while(l1 || l2 || carry){
             int sum=0;
-            if(l1){
+            if(l1)
+            {
                 sum+=l1->val;
                 l1=l1->next;
             }

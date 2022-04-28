@@ -10,25 +10,26 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        if(!list1)
-            return list2;
-        if(!list2)
-            return list1;
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if(!l1)
+            return l2;
+        if(!l2)
+            return l1;
         ListNode* dummy=NULL;
         ListNode* last=NULL;
-        ListNode* p=list1;
-        ListNode* q=list2;
+        ListNode* p=l1;
+        ListNode* q=l2;
+        // making the first node of the new merged list.
         if(p->val<=q->val){
             dummy=last=p;
             p=p->next;
             dummy->next=NULL;
-        }
-        else{
+        }else{
             dummy=last=q;
             q=q->next;
             dummy->next=NULL;
         }
+        // adding smaller value to the list and updating the pointer
         while(p && q){
             if(p->val<=q->val){
                 last->next=p;
@@ -42,11 +43,12 @@ public:
                 last->next=NULL;
             }
         }
+        // which list is left, adjusting last->next to it.
         if(p){
             last->next=p;
         }
         if(q)
             last->next=q;
-        return dummy;   
+        return dummy;
     }
 };

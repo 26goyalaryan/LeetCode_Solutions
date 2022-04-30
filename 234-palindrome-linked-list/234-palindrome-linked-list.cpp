@@ -9,21 +9,41 @@
  * };
  */
 class Solution {
+    // reverse the linked list
+private:
+    ListNode* reverse(ListNode* ptr) {
+    ListNode* pre=NULL;
+    ListNode* nex=NULL;
+    while(ptr!=NULL) {
+        nex = ptr->next;
+        ptr->next = pre;
+        pre=ptr;
+        ptr=nex;
+    }
+    return pre;
+}
 public:
     bool isPalindrome(ListNode* head) {
-        if(head==NULL)
+        if(head==NULL || head->next==NULL)
             return true;
-        vector<int> v;
-        ListNode* p=head;
-        while(p){
-            v.push_back(p->val);
-            p=p->next;
+        ListNode* slow=head;
+        ListNode* fast=head;
+        // find the middle of the list 
+        while(fast->next && fast->next->next){
+            slow=slow->next;
+            fast=fast->next->next;
         }
-        int i=0,j=v.size()-1;
-        while(i<j){
-            if(v[i]!=v[j])
+        ListNode* dummy=head;
+        // revrse after middle part
+        slow->next=reverse(slow->next);
+        // update slow and start checking
+        slow=slow->next;
+        ListNode* p=head;
+        while(slow!=NULL){
+            if(p->val!=slow->val)
                 return false;
-            i++;j--;
+            p=p->next;
+            slow=slow->next;
         }
         return true;
     }

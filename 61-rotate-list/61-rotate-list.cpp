@@ -13,33 +13,27 @@ public:
     ListNode* rotateRight(ListNode* head, int k) {
         if(head==NULL || k==0)
             return head;
-        ListNode* p=head;
         int count=1;
+        ListNode* p=head;
         
-        // step-1: count no. of nodes
-        
+        // count elements and reach till last node
         while(p->next){
             p=p->next;
             count++;
         }
         
-        //step-2 make list circular.   
+        // making list circular
         p->next=head;
-     
-        // step3 adjust k such that every time k is multiple of count, we have to return the same list
-        // so make it k%count so that (k/count) rotation dont take extra time.
-        
         k=k%count;
-        k=count-k;
+        // may be k is so large, so to reduce time complexity, we take %len
+        int n=count-k;
         
-        while(k--){
+        // traverse till len-k nodes so as to break link and return new head 
+        while(n--){
             p=p->next;
         }
-        
-        // step-4 break the circular list and return new head.
-        
-        ListNode* dummy=p->next;
+        ListNode* newHead=p->next;
         p->next=NULL;
-        return dummy;
+        return newHead;
     }
 };

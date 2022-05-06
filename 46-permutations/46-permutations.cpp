@@ -1,22 +1,29 @@
 class Solution {
-    // here we will try to optimise the space complexity without using any freq map.
 public:
     vector<vector<int>> permute(vector<int>& nums) {
+        vector<int> ds;
         vector<vector<int>> ans;
-        addperm(0,nums,ans);
+        int n=nums.size();
+        int freq[n];
+        for(int i=0;i<n;i++)
+            freq[i]=0;
+        solve(ans,ds,nums,freq);
         return ans;
     }
 private:
-    void addperm(int ind,vector<int> &nums, vector<vector<int>> &ans){
-        if(ind==nums.size()){
-            ans.push_back(nums);
+    void solve(vector<vector<int>> &ans,vector<int> &ds,vector<int> &nums,int freq[]){
+        if(ds.size()==nums.size()){
+            ans.push_back(ds);
             return;
         }
-        for(int i=ind;i<nums.size();i++){
-            swap(nums[ind],nums[i]);
-            addperm(ind+1,nums,ans);
-            swap(nums[ind],nums[i]); 
-            // swap back to return original array to right recursion call while backtrack
+        for(int i=0;i<nums.size();i++){
+            if(!freq[i]){
+                ds.push_back(nums[i]);
+                freq[i]=1;
+                solve(ans,ds,nums,freq);
+                freq[i]=0;
+                ds.pop_back();
+            }
         }
     }
 };

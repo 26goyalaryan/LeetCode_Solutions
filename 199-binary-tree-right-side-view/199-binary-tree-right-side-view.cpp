@@ -21,7 +21,6 @@ private:
         if(root==NULL)
             return;
         if(level==ans.size()) 
-            // this check confirms the node is appearing first time.
             ans.push_back(root->val);
         helper(root->right,ans,level+1);
         helper(root->left,ans,level+1);

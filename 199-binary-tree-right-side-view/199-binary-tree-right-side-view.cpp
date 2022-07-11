@@ -17,12 +17,14 @@ public:
         return ans;
     }
 private:
-        void helper(TreeNode* root,vector<int> &ans,int level){
+    void helper(TreeNode* root,vector<int>& ans,int level){
         if(root==NULL)
             return;
-        if(level==ans.size()) 
+        if(ans.size()==level)
+            // to check whther it is the rightmost element in the level
             ans.push_back(root->val);
         helper(root->right,ans,level+1);
+        // bcz first add right->right-> ....
         helper(root->left,ans,level+1);
-    } 
+    }
 };

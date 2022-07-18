@@ -4,9 +4,9 @@ public:
         vector<vector<string>> ans;
         unordered_map<string,vector<string>> mp;
         for(auto it:strs){
-            string t=it;
-            sort(t.begin(),t.end());
-            mp[t].push_back(it);
+            string temp=it;
+            sort(temp.begin(),temp.end());
+            mp[temp].push_back(it);
         }
         for(auto it:mp){
             ans.push_back(it.second);

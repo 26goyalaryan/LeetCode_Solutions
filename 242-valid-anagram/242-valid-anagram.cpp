@@ -1,16 +1,14 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        char fs[26]={0};
-        char ft[26]={0};
+        vector<int> sf(26,0),tf(26,0);
         for(auto it:s){
-            fs[it-'a']++;
+            sf[it-'a']++;
         }
-        for(auto it:t){
-            ft[it-'a']++;
-        }
+        for(auto it:t)
+            tf[it-'a']++;
         for(int i=0;i<26;i++){
-            if(fs[i]!=ft[i])
+            if(sf[i]!=tf[i])
                 return false;
         }
         return true;

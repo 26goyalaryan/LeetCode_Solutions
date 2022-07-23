@@ -11,44 +11,39 @@
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        if(!l1)
+        if(l1==NULL)
             return l2;
-        if(!l2)
+        if(l2==NULL)
             return l1;
         ListNode* dummy=NULL;
         ListNode* last=NULL;
-        ListNode* p=l1;
-        ListNode* q=l2;
-        // making the first node of the new merged list.
-        if(p->val<=q->val){
-            dummy=last=p;
-            p=p->next;
-            dummy->next=NULL;
-        }else{
-            dummy=last=q;
-            q=q->next;
+        if(l1->val<l2->val){
+            dummy=last=l1;
+            l1=l1->next;
             dummy->next=NULL;
         }
-        // adding smaller value to the list and updating the pointer
-        while(p && q){
-            if(p->val<=q->val){
-                last->next=p;
-                last=p;
-                p=p->next;
+        else{
+            dummy=last=l2;
+            l2=l2->next;
+            dummy->next=NULL;
+        }
+        while(l1 && l2){
+            if(l1->val<l2->val){
+                last->next=l1;
+                last=l1;
+                l1=l1->next;
                 last->next=NULL;
             }else{
-                last->next=q;
-                last=q;
-                q=q->next;
+                last->next=l2;
+                last=l2;
+                l2=l2->next;
                 last->next=NULL;
             }
         }
-        // which list is left, adjusting last->next to it.
-        if(p){
-            last->next=p;
-        }
-        if(q)
-            last->next=q;
+        if(l1)
+            last->next=l1;
+        if(l2)
+            last->next=l2;
         return dummy;
     }
 };

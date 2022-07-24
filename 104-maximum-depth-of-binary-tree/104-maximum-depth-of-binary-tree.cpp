@@ -12,10 +12,9 @@
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        int height=0;
+        int ht=0;
         if(root==NULL)
             return 0;
-        // the max height is ht of either left subtree or right...
         int lh=maxDepth(root->left);
         int rh=maxDepth(root->right);
         return 1+max(lh,rh);

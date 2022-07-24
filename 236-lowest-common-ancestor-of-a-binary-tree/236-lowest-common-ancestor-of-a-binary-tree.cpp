@@ -9,21 +9,17 @@
  */
 class Solution {
 public:
-    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) 
-    {
-        if(root==NULL || root==p || root==q)
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root==NULL || root==p || root==q){
             return root;
-        TreeNode* left=lowestCommonAncestor(root->left,p,q);
-        TreeNode* right=lowestCommonAncestor(root->right,p,q);
-        if(left==NULL)
-            return right;
-        else if(right==NULL)
-            return left;
-        else 
+        }
+        TreeNode* lt=lowestCommonAncestor(root->left,p,q);
+        TreeNode* rt=lowestCommonAncestor(root->right,p,q);
+        if(lt==NULL)
+            return rt;
+        else if(rt==NULL)
+            return lt;
+        else
             return root;
-        // both left & right will be not null only when we find both the nodes
-        // ie either nodes in left or right side.
-        
-        // else return null.
     }
 };

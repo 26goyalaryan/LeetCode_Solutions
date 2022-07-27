@@ -10,16 +10,14 @@
  * };
  */
 class Solution {
-    // we will be storing the prev node's address and adjust the right pointer;
-    // update left pointer to NULL;
-    // update the previous pointer 
-public:
     TreeNode* prev=NULL;
+public:
     void flatten(TreeNode* root) {
         if(root==NULL)
-           return;
+            return;
         flatten(root->right);
         flatten(root->left);
+        
         root->right=prev;
         root->left=NULL;
         prev=root;

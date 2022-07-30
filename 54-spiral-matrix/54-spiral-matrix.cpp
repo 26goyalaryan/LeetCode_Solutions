@@ -33,7 +33,6 @@ public:
                 dir=0;
                 left+=1;
             }
-            //dir=(dir+1)%4;
         }
         return ans;
     }

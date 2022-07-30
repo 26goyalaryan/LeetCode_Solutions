@@ -1,22 +1,25 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-        int n=nums.size(),k,l;
-        for(k=n-2;k>=0;k--){
-            if(nums[k]<nums[k+1])
+        
+        int br_pt,n=nums.size(),swp_pt;
+        
+        for(br_pt=n-2;br_pt>=0;br_pt--){
+            if(nums[br_pt]<nums[br_pt+1])
                 break;
         }
-        if(k<0){
+        if(br_pt<0)
+        {
             reverse(nums.begin(),nums.end());
             return;
         }
         else{
-            for(l=n-1;l>k;l--){
-                if(nums[l]>nums[k])
+            for(swp_pt=n-1;swp_pt>br_pt;swp_pt--){
+                if(nums[swp_pt]>nums[br_pt])
                     break;
             }
         }
-        swap(nums[k],nums[l]);
-        reverse(nums.begin()+k+1,nums.end());
+        swap(nums[br_pt],nums[swp_pt]);
+        reverse(nums.begin()+br_pt+1,nums.end());
     }
 };

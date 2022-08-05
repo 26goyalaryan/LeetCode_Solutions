@@ -2,20 +2,20 @@ class Solution {
 public:
     int rob(vector<int>& nums) {
         int n=nums.size();
-        vector<int> dp(n,-1);
-        return f(n-1,nums,dp);
-    }
-    int f(int n,vector<int> &nums,vector<int> &dp){
-        if(n<0)
-            return 0;
-        if(n==0)
-            return nums[0];
-        if(dp[n]!=-1)
-            return dp[n];
+        vector<int> dp(n);
+        dp[0]=nums[0];
+        //int neg=0;
         
-        int pick=nums[n]+f(n-2,nums,dp);
-        int nt_pick=0+f(n-1,nums,dp);
+        for(int i=1;i<n;i++)
+        {
+            int pick=nums[i];
+            if(i>1)
+                pick+=dp[i-2];
+            int nt_pick=dp[i-1];
 
-        return dp[n] = max(pick,nt_pick);
+            dp[i]=max(pick,nt_pick);
+            
+        }
+        return dp[n-1]; //max(pick,nt_pick);
     }
 };

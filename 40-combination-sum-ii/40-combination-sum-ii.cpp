@@ -1,27 +1,25 @@
 class Solution {
 public:
-    vector<vector<int>> combinationSum2(vector<int>& arr, int target) {
-        sort(arr.begin(),arr.end());
+    vector<vector<int>> combinationSum2(vector<int>& nums, int target) {
+        sort(nums.begin(),nums.end());
         vector<int> ds;
         vector<vector<int>> ans;
-        solve(0,target,ans,arr,ds);
+        helper(nums,ans,target,ds,0);
         return ans;
     }
-private:
-    void solve(int ind,int target,vector<vector<int>> &ans,vector<int> &arr,vector<int> &ds){
+    
+    void helper(vector<int> &nums,vector<vector<int>> &ans,int target,vector<int> &ds,int ind){
         if(target==0){
             ans.push_back(ds);
             return;
         }
-        for(int i=ind;i<arr.size();i++){
-            if(i>ind && arr[i]==arr[i-1])
-                // i > ind means that its not the first element of sequence 
-                // and producing the duplicates.
+        for(int i=ind;i<nums.size();i++){
+            if(i>ind && nums[i]==nums[i-1])
                 continue;
-            if(arr[i]>target)
+            if(nums[i]>target)
                 break;
-            ds.push_back(arr[i]);
-            solve(i+1,target-arr[i],ans,arr,ds);
+            ds.push_back(nums[i]);
+            helper(nums,ans,target-nums[i],ds,i+1);
             ds.pop_back();
         }
     }

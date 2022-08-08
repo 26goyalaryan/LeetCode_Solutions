@@ -1,19 +1,29 @@
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
-        int ans=1;
-        vector<int> prefix(nums.size(),1);
         
-        for(int i=1;i<nums.size();i++){
-            for(int j=i-1;j>=0;j--){
+        // we will be maintaining the length of out subseq in res vector
+        
+        // check for lower bound in res
+        
+        // if lb == end ---> res.push (nums[i])
+        
+        // else *lb = nums[i];
+        
+        vector<int> res;
+        
+        for(int i=0; i<nums.size(); i++) {
+        
+            auto it = std::lower_bound(res.begin(), res.end(), nums[i]);
+        
+            if(it==res.end()) 
                 
-                if(nums[j]<nums[i])
-                {
-                    prefix[i]=max(prefix[i],prefix[j]+1);
-                    ans=max(ans,prefix[i]);
-                }
-            }
+                res.push_back(nums[i]);
+        
+            else *it = nums[i];
         }
-        return ans;
+        
+        return res.size();
     }
 };
+   

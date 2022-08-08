@@ -1,25 +1,31 @@
 class Solution {
 public:
-    
-    vector<vector<int>> kClosest(vector<vector<int>>& p, int k) {
-        
-        //declaring maxheap of pair<distance,vector<point>>
-        
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
         priority_queue<pair<int,vector<int>>> pq;
-        int i=0;
-        for(auto it:p){
-            int x = it[0]*it[0] + it[1]*it[1];
-            pq.push({x,{it[0],it[1]}});
-            if(pq.size() > k) 
+        
+        for(int i=0;i<points.size();i++)
+        {
+            int x1=points[i][0];
+            int y1=points[i][1];
+            
+            // no need to takr sqrt bcz sqrt(10) > sqrt(8)
+            
+            int temp= (x1*x1) + (y1*y1);
+            
+            pq.push({temp,{x1,y1}});
+            
+            if(pq.size()>k)
                 pq.pop();
-            i++;
+            
         }
+        
         vector<vector<int>> ans;
+        
         while(!pq.empty()){
             ans.push_back(pq.top().second);
-            cout<<pq.top().first<<endl;
             pq.pop();
         }
+        
         return ans;
     }
 };

@@ -18,10 +18,19 @@ private:
     TreeNode* helper(vector<int>& nums,int low,int high){
         if(low>high)
             return NULL;
+        // apply binary search to array and since it is inorder... 
+        // every mid is a root node 
+        
         int mid=(low+high)/2;
+        
         TreeNode* root=new TreeNode(nums[mid]);
+        
+        // moving towards left
         root->left=helper(nums,low,mid-1);
+         
+        // moving towars right..
         root->right=helper(nums,mid+1,high);
+        
         return root;
     }
 };

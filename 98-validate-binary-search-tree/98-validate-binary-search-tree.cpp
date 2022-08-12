@@ -16,15 +16,22 @@ public:
             return true;
         return helper(root,LONG_MIN,LONG_MAX);
     }
-    bool helper(TreeNode* root,long min,long max){
+    
+    bool helper(TreeNode* root,long min,long max)
+    {
         if(root==NULL)
             return true;
         if(root->val > min && root->val < max){
+            
+            // when we move to left... the root value become max..
             bool left=helper(root->left,min,root->val);
+            
+            // when we move to right.. the root value become min
             bool right=helper(root->right,root->val,max);
             
             return left && right;
-        }else
+        }
+        else
             return false;
     }
 };

@@ -11,32 +11,41 @@
 class Solution {
 public:
     void reorderList(ListNode* head) {
-        if ((!head) || (!head->next) || (!head->next->next)) return; // Edge cases
+        if(!head || !head->next || !head->next->next)
+            return ; // bcz we need at least 3 nodes
         
-        stack<ListNode*> my_stack;
-        ListNode* ptr = head;
-        int size = 0;
-        while (ptr != NULL) // Put all nodes in stack
-        {
-            my_stack.push(ptr);
+        stack<ListNode*> st;
+        
+        ListNode* temp = head;
+        int size=0;
+        
+        while(temp){
+            
+            st.push(temp);
+            
             size++;
-            ptr = ptr->next;
+            
+            temp=temp->next;
         }
         
-        ListNode* pptr = head;
+        ListNode* curr=head;
         
-        for (int j=0; j<size/2; j++)
-            
-            // Between every two nodes insert the one in the top of the stack
+        for(int j=0;j<size/2;j++) // we can put half of the nodes in b/w   
         {
-            ListNode *element = my_stack.top();
-            my_stack.pop();
-            element->next = pptr->next;
             
-            pptr->next = element;
+            // pick topmost node from stack and put b/w 2 nodes
+            ListNode* top = st.top();
+            st.pop();
             
-            pptr = pptr->next->next;
+            top->next=curr->next;
+            
+            curr->next = top;
+            
+            curr=curr->next->next;
         }
-        pptr->next = NULL;
+        
+        curr->next=NULL;
+        
+        return;
     }
 };

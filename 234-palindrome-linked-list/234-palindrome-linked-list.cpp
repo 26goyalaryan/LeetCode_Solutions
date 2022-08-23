@@ -9,37 +9,31 @@
  * };
  */
 class Solution {
-    // reverse the linked list
-private:
-    ListNode* reverse(ListNode* ptr) {
-    ListNode* pre=NULL;
-    ListNode* nex=NULL;
-    while(ptr!=NULL) {
-        nex = ptr->next;
-        ptr->next = pre;
-        pre=ptr;
-        ptr=nex;
-    }
-    return pre;
-}
 public:
+    ListNode* reverse(ListNode* head){
+        ListNode* pre=NULL,*curr=head;
+        ListNode* next=NULL;
+        while(curr!=NULL){
+            next=curr->next;
+            curr->next=pre;
+            pre=curr;
+            curr=next;
+        }
+        return pre;
+    }
     bool isPalindrome(ListNode* head) {
         if(head==NULL || head->next==NULL)
             return true;
-        ListNode* slow=head;
-        ListNode* fast=head;
-        // find the middle of the list 
+        ListNode* slow=head, *fast=head;
         while(fast->next && fast->next->next){
             slow=slow->next;
             fast=fast->next->next;
         }
-        ListNode* dummy=head;
-        // revrse after middle part
         slow->next=reverse(slow->next);
-        // update slow and start checking
         slow=slow->next;
         ListNode* p=head;
-        while(slow!=NULL){
+        while(slow!=NULL)
+        {
             if(p->val!=slow->val)
                 return false;
             p=p->next;

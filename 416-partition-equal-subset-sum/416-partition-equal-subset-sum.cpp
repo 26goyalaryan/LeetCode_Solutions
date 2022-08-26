@@ -11,30 +11,31 @@ public:
         
         int k=sum/2,n=nums.size();
         
-        vector<vector<int>> dp(n,vector<int>(k+1,-1));
-       
-        return helper(n-1,k,nums,dp);
-    }
-    
-    bool helper(int ind, int k, vector<int> &nums,vector<vector<int>> &dp){
+        if(n==1)
+            return false;
         
-        if(k==0)
-            return true;
-        
-        if(ind==0)
-            return (nums[0]==k) ? true : false;
-        
-        if(dp[ind][k]!=-1)
-            return dp[ind][k];
-        
-        bool pick=false;
-        
-        if(nums[ind]<=k)
-            pick = helper(ind-1,k-nums[ind],nums,dp);
-        
-        
-        bool nt_pick = helper(ind-1,k,nums,dp);
-        
-        return dp[ind][k] = (pick||nt_pick);
+        vector<vector<bool>> dp(n,vector<bool>(k+1,0));
+
+        for(int i=0;i<=n-1;i++)
+            dp[i][0] = true; // for all caes where target is zero
+
+        //dp[0][nums[0]] = true; // where the target == element at last index
+
+        for(int ind = 1;ind<n;ind++){
+            
+            for(int j=1;j<=k;j++){
+                
+                bool ntpk = dp[ind-1][j];
+
+                bool pick = false;
+
+                if(j>=nums[ind])
+                    
+                    pick=dp[ind-1][j-nums[ind]];
+                
+                dp[ind][j]=(pick||ntpk);
+            }
+        }
+        return dp[n-1][k];
     }
 };

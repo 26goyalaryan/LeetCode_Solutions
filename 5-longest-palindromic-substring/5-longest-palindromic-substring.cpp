@@ -28,7 +28,7 @@ public:
                 if(dp[i][j]){
                     if(maxi<j-i+1){
                         maxi=j-i+1;
-                        ans=s.substr(i,j-i+1);
+                        ans=s.substr(i,maxi);
                         // substr takes 2 arg, i is start index, other is length
                     }
                 }

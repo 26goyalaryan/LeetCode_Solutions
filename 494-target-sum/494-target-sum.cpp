@@ -23,10 +23,12 @@ public:
         
         int s1 = (sum - target)/2;
         
-        return helper(n-1,nums,s1);
+        vector<vector<int>> dp(n,vector<int>(s1+1,-1));
+        
+        return helper(n-1,nums,dp,s1);
     }
     
-    int helper(int ind,vector<int> &nums,int target){
+    int helper(int ind,vector<int> &nums,vector<vector<int>> &dp,int target){
         
         if(ind==0){
             if(target==0 && nums[ind]==0)
@@ -36,13 +38,16 @@ public:
             return 0;
         }
         
+        if(dp[ind][target] != -1)
+            return dp[ind][target];
+        
         int pick=0,nt_pick=0;
         
-        nt_pick = helper(ind-1,nums,target);
+        nt_pick = helper(ind-1,nums,dp,target);
         
         if(nums[ind]<=target)
-            pick = helper(ind-1,nums,target-nums[ind]);
+            pick = helper(ind-1,nums,dp,target-nums[ind]);
         
-        return pick+nt_pick;
+        return dp[ind][target] = pick+nt_pick;
     }
 };

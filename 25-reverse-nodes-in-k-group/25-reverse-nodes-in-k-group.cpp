@@ -11,10 +11,10 @@
 class Solution {
     int count(ListNode* head){
         int count=0;
-        ListNode* itr=head;
-        while(itr!=NULL){
+        ListNode* it=head;
+        while(it!=NULL){
            
-            itr=itr->next;
+            it=it->next;
             count++;
         }
         return count;
@@ -23,14 +23,14 @@ public:
     ListNode* helper(ListNode* head, int k,int len) {
         if(len<k)
             return head;
-        int count_chk=0;
-        ListNode* prev=NULL,*next=NULL,*curr=head;
-        while(count_chk<k && curr!=NULL){
+        int cnt=0;
+        ListNode* curr=head,*prev=NULL,*next=NULL;
+        while(cnt<k && curr!=NULL){
             next=curr->next;
             curr->next=prev;
             prev=curr;
             curr=next;
-            count_chk++;
+            cnt++;
         }
         if(next!=NULL)
             head->next=helper(next,k,len-k);

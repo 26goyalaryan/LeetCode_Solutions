@@ -10,21 +10,20 @@
  * };
  */
 class Solution {
+    int sum=0;
 public:
     int sumOfLeftLeaves(TreeNode* root) {
         if(root==NULL)
             return 0;
-        int leftsum=0;
-        helper(root,leftsum);
-        return leftsum;
+        helper(root);
+        return sum;
     }
-private: 
-    void helper(TreeNode* root,int &leftsum){
-        if(!root)
+    void helper(TreeNode* root){
+        if(root==NULL)
             return;
         if(root->left && !root->left->left && !root->left->right)
-            leftsum+=root->left->val;
-        helper(root->left,leftsum);
-        helper(root->right,leftsum);
+            sum+=root->left->val;
+        helper(root->left);
+        helper(root->right);
     }
 };
